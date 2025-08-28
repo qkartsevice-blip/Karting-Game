@@ -14,10 +14,12 @@
             margin: 0;
             font-family: 'Arial', sans-serif;
             color: #ecf0f1;
+            overflow: hidden; /* 防止手機滾動 */
         }
 
         .game-container {
             text-align: center;
+            position: relative;
         }
 
         h1 {
@@ -30,6 +32,7 @@
             border: 5px solid #bdc3c7;
             background-color: #34495e; /* 如果圖片載入失敗，會顯示這個背景色 */
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            touch-action: manipulation; /* 防止雙擊縮放等手機預設行為 */
         }
     </style>
 </head>
@@ -56,12 +59,6 @@
             x: 20,
             y: canvas.height - 70,
             width: 150,
-            height: 50
-        };
-        const playAgainButton = {
-            x: canvas.width / 2 - 100,
-            y: canvas.height / 2 + 50,
-            width: 200,
             height: 50
         };
 
@@ -209,7 +206,6 @@
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText("遊戲結束！", canvas.width / 2, canvas.height / 2 - 50);
-            drawButton("再玩一次", playAgainButton.x, playAgainButton.y, playAgainButton.width, playAgainButton.height, '#2ecc71');
         }
 
         function drawGameComplete() {
@@ -220,7 +216,6 @@
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(`恭喜你通過所有關卡！你的分數是 ${score}/100`, canvas.width / 2, canvas.height / 2 - 50);
-            drawButton("再玩一次", playAgainButton.x, playAgainButton.y, playAgainButton.width, playAgainButton.height, '#2ecc71');
         }
 
         function drawStartScreen() {
@@ -296,12 +291,6 @@
                 mouseY >= restartButton.y && mouseY <= restartButton.y + restartButton.height) {
                 resetGame();
             }
-            // 檢查是否點擊了「再玩一次」按鈕 (只有在遊戲結束或完成畫面才有效)
-            if ((gameState === 'gameOver' || gameState === 'gameComplete') &&
-                mouseX >= playAgainButton.x && mouseX <= playAgainButton.x + playAgainButton.width &&
-                mouseY >= playAgainButton.y && mouseY <= playAgainButton.y + playAgainButton.height) {
-                resetGame();
-            }
         });
 
         // 玩家控制
@@ -360,7 +349,7 @@
         }
 
         // 啟動遊戲迴圈
-        gameLoop(); 
+        gameLoop();
     </script>
 </body>
 </html>
