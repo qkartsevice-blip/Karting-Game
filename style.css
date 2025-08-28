@@ -7,7 +7,7 @@ body {
     margin: 0;
     font-family: 'Arial', sans-serif;
     color: #ecf0f1;
-    overflow: hidden;
+    overflow: hidden; /* 防止手機滾動 */
 }
 
 .game-container {
@@ -23,9 +23,9 @@ h1 {
 
 canvas {
     border: 5px solid #bdc3c7;
-    background-color: #34495e;
+    background-color: #34495e; /* 如果圖片載入失敗，會顯示這個背景色 */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    touch-action: manipulation;
+    touch-action: manipulation; /* 防止雙擊縮放等手機預設行為 */
 }
 
 /* 虛擬方向鍵樣式 */
@@ -45,7 +45,7 @@ canvas {
         "left . right";
     gap: 5px;
     width: 150px;
-    height: 100px;
+    height: 100px; /* 高度縮減，因為沒有下鍵 */
 }
 
 .dpad button {
